@@ -149,3 +149,12 @@ export const birthdayLetter = {
     closing: "Happy Birthday, Richi. I'm really lucky to call you my bestie.",
     signature: "— Sumaiya",
 };
+
+export const finalSurprise = {
+    title: "Hey, Richi...",
+    message:
+        "If you made it all the way here, then I guess you survived the entire emotional rollercoaster.",
+    wish: "I hope 17 September 2026 is the beginning of a year filled with happiness, good people, unexpected adventures, and all the things you secretly wish for.",
+    ending: "Here's to Year 4.",
+    signature: "And many, many more years of us.",
+};

@@ -13,6 +13,7 @@ import {
     friendshipMovie,
     emotionalTransition,
     birthdayLetter,
+    finalSurprise,
 } from "@/data/memories";
 
 export default function Home() {
@@ -1448,6 +1449,188 @@ export default function Home() {
                             </motion.div>
                         </motion.div>
                     )}
+                </div>
+            </section>
+
+            {/* ==================== FINAL SURPRISE ==================== */}
+            <section
+                id="final-surprise"
+                className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#24151f] px-6 py-32"
+            >
+                {/* Background glow */}
+                <motion.div
+                    className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-400/10 blur-[120px]"
+                    animate={{
+                        scale: [1, 1.15, 1],
+                        opacity: [0.25, 0.45, 0.25],
+                    }}
+                    transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                />
+
+                {/* Floating hearts */}
+                <motion.div
+                    animate={{
+                        y: [0, -20, 0],
+                        opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="absolute left-[15%] top-[20%]"
+                >
+                    <Heart
+                        size={18}
+                        strokeWidth={1.3}
+                        className="text-rose-300/40"
+                    />
+                </motion.div>
+
+                <motion.div
+                    animate={{
+                        y: [0, 15, 0],
+                        opacity: [0.2, 0.5, 0.2],
+                    }}
+                    transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        delay: 1,
+                        ease: "easeInOut",
+                    }}
+                    className="absolute right-[18%] top-[30%]"
+                >
+                    <Heart
+                        size={14}
+                        strokeWidth={1.3}
+                        className="text-rose-300/30"
+                    />
+                </motion.div>
+
+                <motion.div
+                    animate={{
+                        y: [0, -15, 0],
+                        opacity: [0.2, 0.45, 0.2],
+                    }}
+                    transition={{
+                        duration: 4.5,
+                        repeat: Infinity,
+                        delay: 0.5,
+                        ease: "easeInOut",
+                    }}
+                    className="absolute bottom-[20%] left-[25%]"
+                >
+                    <Heart
+                        size={12}
+                        strokeWidth={1.3}
+                        className="text-rose-300/30"
+                    />
+                </motion.div>
+
+                <div className="relative z-10 mx-auto max-w-3xl text-center">
+                    {/* Small label */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-8 text-xs uppercase tracking-[0.4em] text-rose-200/50"
+                    >
+                        The End... Probably
+                    </motion.p>
+
+                    {/* Main title */}
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="font-playfair text-5xl leading-tight text-white md:text-7xl"
+                    >
+                        {finalSurprise.title}
+                    </motion.h2>
+
+                    {/* Divider */}
+                    <motion.div
+                        initial={{ opacity: 0, scaleX: 0 }}
+                        whileInView={{ opacity: 1, scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="mx-auto my-10 h-px w-16 bg-rose-200/30"
+                    />
+
+                    {/* Message */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.4 }}
+                        className="text-base leading-8 text-rose-50/70 md:text-lg md:leading-9"
+                    >
+                        {finalSurprise.message}
+                    </motion.p>
+
+                    {/* Wish */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.7 }}
+                        className="mx-auto mt-8 max-w-2xl text-sm leading-8 text-rose-100/60 md:text-base md:leading-9"
+                    >
+                        {finalSurprise.wish}
+                    </motion.p>
+
+                    {/* Year 4 */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 1 }}
+                        className="mt-14"
+                    >
+                        <p className="font-playfair text-3xl italic text-rose-100 md:text-4xl">
+                            {finalSurprise.ending}
+                        </p>
+
+                        <p className="mt-4 text-sm tracking-wide text-rose-200/50">
+                            {finalSurprise.signature}
+                        </p>
+                    </motion.div>
+
+                    {/* Heart */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            duration: 0.8,
+                            delay: 1.3,
+                            type: "spring",
+                        }}
+                        className="mt-16 flex justify-center"
+                    >
+                        <Heart
+                            size={28}
+                            strokeWidth={1.3}
+                            className="text-rose-300/70"
+                        />
+                    </motion.div>
+
+                    {/* Signature */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 1.6 }}
+                        className="mt-20 text-[10px] uppercase tracking-[0.5em] text-rose-200/30"
+                    >
+                        Made with way too much love & chaos
+                    </motion.p>
                 </div>
             </section>
         </main>

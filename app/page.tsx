@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Heart, Sparkles, Volume2, VolumeX, ArrowDown } from "lucide-react";
-import { photos, birthdayVideos } from "@/data/memories";
+import { photos, birthdayVideos, richiThings } from "@/data/memories";
 
 export default function Home() {
     const [started, setStarted] = useState(false);
@@ -533,6 +533,144 @@ export default function Home() {
                         <p className="mt-2 font-playfair text-2xl italic text-pink-300">
                             Don&apos;t worry. I have more embarrassing things
                             planned.
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Things That Make Richi... */}
+
+            <section
+                id="richi-things"
+                className="relative overflow-hidden bg-[#fff5f8] px-6 py-28 sm:px-10 lg:px-16"
+            >
+                {/* Background */}
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-200/20 blur-3xl" />
+
+                <div className="relative mx-auto max-w-6xl">
+                    {/* Heading */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mb-16 max-w-2xl text-center"
+                    >
+                        <div className="mb-4 flex items-center justify-center gap-2 text-pink-500">
+                            <Sparkles size={18} />
+
+                            <span className="text-xs font-medium uppercase tracking-[0.35em]">
+                                Chapter Three
+                            </span>
+
+                            <Sparkles size={18} />
+                        </div>
+
+                        <h2 className="font-playfair text-4xl font-semibold text-rose-950 sm:text-5xl md:text-6xl">
+                            Things That Make Richi...
+                        </h2>
+
+                        <h3 className="mt-2 font-playfair text-3xl italic text-pink-500 sm:text-4xl">
+                            Richi.
+                        </h3>
+
+                        <p className="mt-6 text-base leading-7 text-rose-900/60 sm:text-lg">
+                            Because honestly, there is no normal way to describe
+                            you.
+                        </p>
+                    </motion.div>
+
+                    {/* Cards */}
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {richiThings.map((item, index) => {
+                            const Icon = item.icon;
+
+                            return (
+                                <motion.div
+                                    key={item.title}
+                                    initial={{
+                                        opacity: 0,
+                                        y: 40,
+                                    }}
+                                    whileInView={{
+                                        opacity: 1,
+                                        y: 0,
+                                    }}
+                                    viewport={{
+                                        once: true,
+                                        amount: 0.2,
+                                    }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: index * 0.08,
+                                    }}
+                                    whileHover={{
+                                        y: -10,
+                                        rotate: index % 2 === 0 ? 1 : -1,
+                                        scale: 1.03,
+                                    }}
+                                    className="group cursor-default"
+                                >
+                                    <div className="relative h-full overflow-hidden rounded-3xl border border-pink-100 bg-white p-7 shadow-lg shadow-pink-100/40 transition duration-500 group-hover:shadow-xl group-hover:shadow-pink-200/50">
+                                        <motion.div
+                                            whileHover={{
+                                                scale: 1.2,
+                                                rotate: 10,
+                                            }}
+                                            className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-pink-50 shadow-sm"
+                                        >
+                                            <Icon
+                                                size={30}
+                                                strokeWidth={1.7}
+                                                className="text-pink-500"
+                                            />
+                                        </motion.div>
+
+                                        {/* Number */}
+                                        <div className="absolute right-5 top-5 font-playfair text-5xl text-pink-100">
+                                            {String(index + 1).padStart(2, "0")}
+                                        </div>
+
+                                        <h3 className="font-playfair text-2xl font-semibold text-rose-950">
+                                            {item.title}
+                                        </h3>
+
+                                        <p className="mt-3 text-sm leading-6 text-rose-900/60">
+                                            {item.description}
+                                        </p>
+
+                                        {/* Bottom decoration */}
+                                        <div className="mt-6 flex items-center gap-2 text-pink-300">
+                                            <Heart
+                                                size={12}
+                                                fill="currentColor"
+                                            />
+
+                                            <div className="h-px flex-1 bg-pink-100" />
+
+                                            <Sparkles size={12} />
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Bottom message */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mt-20 max-w-2xl text-center"
+                    >
+                        <p className="font-playfair text-2xl italic leading-relaxed text-rose-900/70 sm:text-3xl">
+                            “You&apos;re a little chaotic, a little dramatic,
+                            occasionally serious...”
+                        </p>
+
+                        <p className="mt-4 font-playfair text-2xl italic text-pink-500 sm:text-3xl">
+                            ...and somehow, completely irreplaceable.
                         </p>
                     </motion.div>
                 </div>

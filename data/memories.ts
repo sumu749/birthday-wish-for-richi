@@ -1,3 +1,12 @@
+import {
+    MessageCircle,
+    Wind,
+    Sparkles,
+    Brain,
+    Laugh,
+    Heart,
+} from "lucide-react";
+
 export const photos = [
     "/images/photo-01.jpg",
     "/images/photo-02.jpg",
@@ -43,5 +52,44 @@ export const birthdayVideos = [
     {
         src: "/videos/birthday-funny-04.mp4",
         caption: "A little extra chaos, specially for you.",
+    },
+];
+
+export const richiThings = [
+    {
+        icon: MessageCircle,
+        title: "The Extrovert",
+        description:
+            "Can somehow turn a completely random situation into a full conversation.",
+    },
+    {
+        icon: Wind,
+        title: "The Chaos",
+        description:
+            "If everything is going according to plan, Richi will probably fix that.",
+    },
+    {
+        icon: Sparkles,
+        title: "The Cute One",
+        description:
+            "Acts like she has everything under control. Sometimes even convincing.",
+    },
+    {
+        icon: Brain,
+        title: "The Serious One",
+        description:
+            "That sudden serious face when something actually matters.",
+    },
+    {
+        icon: Laugh,
+        title: "The Problem",
+        description:
+            "Somehow responsible for at least 50% of the nonsense we've experienced.",
+    },
+    {
+        icon: Heart,
+        title: "My Person",
+        description:
+            "Under all the chaos, she's someone I'm genuinely grateful to have.",
     },
 ];

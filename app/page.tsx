@@ -10,6 +10,7 @@ import {
     richiThings,
     littleMemories,
     friendshipMovie,
+    emotionalTransition,
 } from "@/data/memories";
 
 export default function Home() {
@@ -950,6 +951,90 @@ export default function Home() {
                                 We&apos;re still waiting for the sequel.
                             </p>
                         </motion.div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* ==================== EMOTIONAL TRANSITION ==================== */}
+            <section
+                id="emotional-transition"
+                className="relative overflow-hidden bg-linear-to-b from-[#2a1724] via-[#3a1d2f] to-[#fdf4f7] px-6 py-32 md:py-44"
+            >
+                {/* Soft background glow */}
+                <motion.div
+                    className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-pink-400/10 blur-3xl"
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                />
+
+                <div className="relative mx-auto max-w-3xl text-center">
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-8 text-xs font-medium uppercase tracking-[0.4em] text-pink-200/70"
+                    >
+                        {emotionalTransition.label}
+                    </motion.p>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.15 }}
+                        className="font-playfair text-4xl leading-tight text-white md:text-6xl"
+                    >
+                        {emotionalTransition.title}
+                    </motion.h2>
+
+                    <motion.div
+                        initial={{ opacity: 0, scaleX: 0 }}
+                        whileInView={{ opacity: 1, scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="mx-auto my-10 h-px w-16 bg-pink-200/40"
+                    />
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.4 }}
+                        className="text-base leading-8 text-pink-50/80 md:text-lg md:leading-9"
+                    >
+                        {emotionalTransition.text}
+                    </motion.p>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.65 }}
+                        className="mt-10 font-playfair text-2xl italic text-white md:text-3xl"
+                    >
+                        {emotionalTransition.highlight}
+                    </motion.p>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 1 }}
+                        className="mt-16 flex justify-center"
+                    >
+                        <Heart
+                            size={22}
+                            strokeWidth={1.5}
+                            className="text-pink-200/70"
+                        />
                     </motion.div>
                 </div>
             </section>

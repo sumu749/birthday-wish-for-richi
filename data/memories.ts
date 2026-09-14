@@ -130,3 +130,10 @@ export const friendshipMovie = {
     duration: "3 Years",
     rating: "∞ / 10",
 };
+
+export const emotionalTransition = {
+    label: "But Jokes Aside...",
+    title: "Three years is a long time.",
+    text: "And somewhere between all the random conversations, stupid jokes, chaotic moments, and countless memories, you became someone I genuinely can't imagine my life without.",
+    highlight: "I'm really, really glad I met you.",
+};

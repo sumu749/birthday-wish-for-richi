@@ -26,3 +26,22 @@ export const photos = [
     "/images/photo-25.jpg",
     "/images/photo-26.jpg",
 ];
+
+export const birthdayVideos = [
+    {
+        src: "/videos/birthday-funny-01.mp4",
+        caption: "This is literally your birthday energy.",
+    },
+    {
+        src: "/videos/birthday-funny-02.mp4",
+        caption: "Because one birthday wish was obviously not enough.",
+    },
+    {
+        src: "/videos/birthday-funny-03.mp4",
+        caption: "No explanation needed. Just enjoy this.",
+    },
+    {
+        src: "/videos/birthday-funny-04.mp4",
+        caption: "A little extra chaos, specially for you.",
+    },
+];

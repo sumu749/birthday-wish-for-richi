@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Heart, Sparkles, Volume2, VolumeX, ArrowDown } from "lucide-react";
-import { photos } from "@/data/memories";
+import { photos, birthdayVideos } from "@/data/memories";
 
 export default function Home() {
     const [started, setStarted] = useState(false);
@@ -394,6 +394,145 @@ export default function Home() {
                         <p className="mt-3 text-sm text-rose-900/45">
                             Three years. Twenty-six pictures. A million little
                             moments.
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Birthday Chaos */}
+
+            <section
+                id="birthday-chaos"
+                className="relative overflow-hidden bg-rose-950 px-6 py-28 text-white sm:px-10 lg:px-16"
+            >
+                {/* Background decorations */}
+                <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-pink-500/20 blur-3xl" />
+                <div className="pointer-events-none absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl" />
+
+                <div className="relative mx-auto max-w-6xl">
+                    {/* Heading */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mb-16 max-w-2xl text-center"
+                    >
+                        <div className="mb-5 flex items-center justify-center gap-2 text-pink-300">
+                            <Sparkles size={18} />
+                            <span className="text-xs font-medium uppercase tracking-[0.35em]">
+                                Chapter Two
+                            </span>
+                            <Sparkles size={18} />
+                        </div>
+
+                        <h2 className="font-playfair text-4xl font-semibold sm:text-5xl md:text-6xl">
+                            Okay... Enough Emotions.
+                        </h2>
+
+                        <p className="mt-5 text-base leading-7 text-pink-100/70 sm:text-lg">
+                            You thought this was going to be a serious birthday
+                            website?
+                        </p>
+
+                        <p className="mt-3 font-playfair text-2xl italic text-pink-300">
+                            Absolutely not. 😂
+                        </p>
+                    </motion.div>
+
+                    {/* Funny intro */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="mx-auto mb-14 max-w-xl rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm"
+                    >
+                        <p className="text-sm leading-6 text-pink-100/70">
+                            Because apparently saying “Happy Birthday” once
+                            wasn&apos;t enough. So here are some completely
+                            necessary birthday wishes.
+                        </p>
+
+                        <p className="mt-3 text-xs uppercase tracking-[0.25em] text-pink-300">
+                            Warning: May cause uncontrollable laughing
+                        </p>
+                    </motion.div>
+
+                    {/* Videos */}
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                        {birthdayVideos.map((video, index) => (
+                            <motion.div
+                                key={video.src}
+                                initial={{
+                                    opacity: 0,
+                                    y: 50,
+                                }}
+                                whileInView={{
+                                    opacity: 1,
+                                    y: 0,
+                                }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{
+                                    duration: 0.7,
+                                    delay: index * 0.1,
+                                }}
+                                whileHover={{
+                                    y: -8,
+                                }}
+                                className="group"
+                            >
+                                <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-3 shadow-2xl backdrop-blur-sm transition duration-500 group-hover:border-pink-300/30">
+                                    <div className="relative overflow-hidden rounded-2xl bg-black">
+                                        <video
+                                            src={video.src}
+                                            controls
+                                            playsInline
+                                            preload="metadata"
+                                            className="aspect-video w-full object-cover"
+                                        />
+                                    </div>
+
+                                    <div className="px-3 pb-3 pt-5">
+                                        <div className="mb-2 flex items-center gap-2 text-pink-300">
+                                            <Heart
+                                                size={13}
+                                                fill="currentColor"
+                                            />
+
+                                            <span className="text-[10px] font-medium uppercase tracking-[0.2em]">
+                                                Birthday Wish{" "}
+                                                {String(index + 1).padStart(
+                                                    2,
+                                                    "0",
+                                                )}
+                                            </span>
+                                        </div>
+
+                                        <p className="font-playfair text-xl italic text-pink-50/90">
+                                            {video.caption}
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Bottom joke */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="mt-20 text-center"
+                    >
+                        <p className="text-sm text-pink-100/50">
+                            Still not enough?
+                        </p>
+
+                        <p className="mt-2 font-playfair text-2xl italic text-pink-300">
+                            Don&apos;t worry. I have more embarrassing things
+                            planned.
                         </p>
                     </motion.div>
                 </div>

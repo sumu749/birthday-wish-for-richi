@@ -2,7 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Heart, Sparkles, Volume2, VolumeX, ArrowDown } from "lucide-react";
+import { photos } from "@/data/memories";
 
 export default function Home() {
     const [started, setStarted] = useState(false);
@@ -43,7 +45,9 @@ export default function Home() {
     return (
         <main className="min-h-screen overflow-hidden bg-[#fff7fa]">
             {/* Music */}
-            <audio ref={audioRef} src="/music/birthday.m4a" loop />
+            <audio ref={audioRef} loop>
+                <source src="/music/birthday.m4a" type="audio/m4a" />
+            </audio>
 
             {/* Music Control */}
             <AnimatePresence>
@@ -249,19 +253,149 @@ export default function Home() {
                 </motion.div>
             </section>
 
-            {/* Temporary next section */}
+            {/* Memory section */}
             <section
                 id="memories"
-                className="flex min-h-screen items-center justify-center bg-[#fff0f5] px-6"
+                className="relative overflow-hidden bg-[#fff5f8] px-6 py-28 sm:px-10 lg:px-16"
             >
-                <div className="text-center">
-                    <p className="text-sm uppercase tracking-[0.3em] text-rose-400">
-                        Coming next...
-                    </p>
+                {/* Soft background decoration */}
+                <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-pink-200/30 blur-3xl" />
+                <div className="pointer-events-none absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-rose-200/30 blur-3xl" />
 
-                    <h2 className="mt-4 font-playfair text-5xl font-bold text-[#6d3048]">
-                        Our Memories 📸
-                    </h2>
+                <div className="relative mx-auto max-w-7xl">
+                    {/* Heading */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mb-16 max-w-2xl text-center"
+                    >
+                        <div className="mb-4 flex items-center justify-center gap-2 text-pink-500">
+                            <Sparkles size={18} />
+                            <span className="text-xs font-medium uppercase tracking-[0.35em]">
+                                Chapter One
+                            </span>
+                            <Sparkles size={18} />
+                        </div>
+
+                        <h2 className="font-playfair text-4xl font-semibold text-rose-950 sm:text-5xl md:text-6xl">
+                            Three Years of Us
+                        </h2>
+
+                        <p className="mt-5 text-base leading-7 text-rose-900/65 sm:text-lg">
+                            Three years of friendship, countless memories,
+                            random conversations, laughter, and way too many
+                            pictures.
+                        </p>
+
+                        <p className="mt-4 font-playfair text-lg italic text-pink-500">
+                            Somehow, we made it this far. ♡
+                        </p>
+                    </motion.div>
+
+                    {/* Photo Gallery */}
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        {photos.map((photo, index) => {
+                            const rotations = [-3, 2, -2, 3, -1, 2];
+
+                            return (
+                                <motion.div
+                                    key={photo}
+                                    initial={{
+                                        opacity: 0,
+                                        y: 50,
+                                        rotate: rotations[
+                                            index % rotations.length
+                                        ],
+                                    }}
+                                    whileInView={{
+                                        opacity: 1,
+                                        y: 0,
+                                        rotate: rotations[
+                                            index % rotations.length
+                                        ],
+                                    }}
+                                    whileHover={{
+                                        scale: 1.04,
+                                        rotate: 0,
+                                        y: -8,
+                                        zIndex: 10,
+                                    }}
+                                    viewport={{ once: true, amount: 0.15 }}
+                                    transition={{
+                                        duration: 0.6,
+                                        delay: (index % 3) * 0.08,
+                                    }}
+                                    className="group relative"
+                                >
+                                    {/* Tape */}
+                                    <div className="absolute -top-3 left-1/2 z-20 h-7 w-20 -translate-x-1/2 -rotate-3 bg-pink-200/70 shadow-sm" />
+
+                                    {/* Polaroid */}
+                                    <div className="rounded-sm bg-white p-3 pb-6 shadow-xl shadow-rose-200/30">
+                                        <div className="relative aspect-4/3 overflow-hidden rounded-sm bg-rose-100">
+                                            <Image
+                                                src={photo}
+                                                alt={`Richi memory ${index + 1}`}
+                                                fill
+                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                                            />
+
+                                            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-rose-950/15 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                                        </div>
+
+                                        <div className="flex items-center justify-between px-1 pt-4">
+                                            <div className="flex items-center gap-2 text-pink-400">
+                                                <Heart
+                                                    size={13}
+                                                    fill="currentColor"
+                                                />
+
+                                                <span className="text-[10px] font-medium uppercase tracking-[0.2em]">
+                                                    Memory{" "}
+                                                    {String(index + 1).padStart(
+                                                        2,
+                                                        "0",
+                                                    )}
+                                                </span>
+                                            </div>
+
+                                            <Sparkles
+                                                size={14}
+                                                className="text-pink-300 opacity-0 transition group-hover:opacity-100"
+                                            />
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Ending */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mt-20 text-center"
+                    >
+                        <Heart
+                            size={20}
+                            fill="currentColor"
+                            className="mx-auto mb-4 text-pink-400"
+                        />
+
+                        <p className="font-playfair text-2xl italic text-rose-900/70">
+                            And these are just a few of them...
+                        </p>
+
+                        <p className="mt-3 text-sm text-rose-900/45">
+                            Three years. Twenty-six pictures. A million little
+                            moments.
+                        </p>
+                    </motion.div>
                 </div>
             </section>
         </main>

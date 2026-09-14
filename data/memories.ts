@@ -137,3 +137,15 @@ export const emotionalTransition = {
     text: "And somewhere between all the random conversations, stupid jokes, chaotic moments, and countless memories, you became someone I genuinely can't imagine my life without.",
     highlight: "I'm really, really glad I met you.",
 };
+
+export const birthdayLetter = {
+    greeting: "Dear Richi,",
+    paragraphs: [
+        "Three years ago, I didn't know that a random friendship would become something this special.",
+        "We've had our share of ridiculous conversations, chaotic moments, random laughter, and probably enough nonsense to fill several lifetimes.",
+        "But behind all of that, there are so many little moments that I'm genuinely grateful for. Thank you for being someone I can laugh with, talk to, and simply be myself around.",
+        "I don't know what the next few years will look like, but I really hope our friendship continues to grow, change, and somehow remain just as chaotic.",
+    ],
+    closing: "Happy Birthday, Richi. I'm really lucky to call you my bestie.",
+    signature: "— Sumaiya",
+};

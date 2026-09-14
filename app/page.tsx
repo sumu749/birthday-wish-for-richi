@@ -12,12 +12,14 @@ import {
     littleMemories,
     friendshipMovie,
     emotionalTransition,
+    birthdayLetter,
 } from "@/data/memories";
 
 export default function Home() {
     const [started, setStarted] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [candlesBlown, setCandlesBlown] = useState(false);
+    const [letterOpen, setLetterOpen] = useState(false);
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -1256,6 +1258,196 @@ export default function Home() {
                             </motion.div>
                         )}
                     </AnimatePresence>
+                </div>
+            </section>
+
+            {/* ==================== PERSONAL LETTER ==================== */}
+            <section
+                id="birthday-letter"
+                className="relative overflow-hidden bg-[#fdf4f7] px-6 py-32 md:py-40"
+            >
+                <div className="mx-auto max-w-3xl text-center">
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-5 text-xs font-medium uppercase tracking-[0.35em] text-rose-400"
+                    >
+                        A Few Words From Me
+                    </motion.p>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.1 }}
+                        className="font-playfair text-4xl text-[#4a2635] md:text-6xl"
+                    >
+                        One Last Thing...
+                    </motion.h2>
+
+                    {!letterOpen ? (
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.9, delay: 0.3 }}
+                            className="mt-20"
+                        >
+                            {/* Envelope */}
+                            <motion.div
+                                whileHover={{ y: -8 }}
+                                transition={{ type: "spring", stiffness: 250 }}
+                                className="relative mx-auto h-52 w-80 cursor-pointer md:h-60 md:w-105"
+                                onClick={() => setLetterOpen(true)}
+                            >
+                                {/* Envelope shadow */}
+                                <div className="absolute inset-x-4 bottom-0 h-8 rounded-full bg-rose-900/10 blur-xl" />
+
+                                {/* Envelope body */}
+                                <div className="absolute inset-0 overflow-hidden rounded-xl bg-[#e9a6b9] shadow-2xl">
+                                    {/* Left fold */}
+                                    <div
+                                        className="absolute bottom-0 left-0 h-full w-1/2"
+                                        style={{
+                                            clipPath:
+                                                "polygon(0 0, 100% 50%, 0 100%)",
+                                            background: "#d98da5",
+                                        }}
+                                    />
+
+                                    {/* Right fold */}
+                                    <div
+                                        className="absolute bottom-0 right-0 h-full w-1/2"
+                                        style={{
+                                            clipPath:
+                                                "polygon(100% 0, 100% 100%, 0 50%)",
+                                            background: "#d58aa2",
+                                        }}
+                                    />
+
+                                    {/* Bottom fold */}
+                                    <div
+                                        className="absolute bottom-0 left-0 h-1/2 w-full"
+                                        style={{
+                                            clipPath:
+                                                "polygon(0 100%, 50% 0, 100% 100%)",
+                                            background: "#df96ad",
+                                        }}
+                                    />
+
+                                    {/* Heart seal */}
+                                    <motion.div
+                                        animate={{
+                                            scale: [1, 1.05, 1],
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                        }}
+                                        className="absolute left-1/2 top-1/2 z-20 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg"
+                                    >
+                                        <Heart
+                                            size={22}
+                                            fill="currentColor"
+                                            strokeWidth={1.5}
+                                            className="text-rose-400"
+                                        />
+                                    </motion.div>
+
+                                    {/* Top flap */}
+                                    <div
+                                        className="absolute left-0 top-0 z-10 h-1/2 w-full"
+                                        style={{
+                                            clipPath:
+                                                "polygon(0 0, 100% 0, 50% 100%)",
+                                            background: "#f2b4c4",
+                                        }}
+                                    />
+                                </div>
+                            </motion.div>
+
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.96 }}
+                                onClick={() => setLetterOpen(true)}
+                                className="mt-10 rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl"
+                            >
+                                Open My Letter
+                            </motion.button>
+
+                            <p className="mt-4 text-xs text-[#9a7181]">
+                                I promise it&apos;s not as dramatic as it looks.
+                            </p>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            transition={{
+                                duration: 0.9,
+                                ease: "easeOut",
+                            }}
+                            className="mx-auto mt-16 max-w-2xl rounded-2xl bg-[#fffafc] px-7 py-10 text-left shadow-xl shadow-rose-900/5 md:px-14 md:py-14"
+                        >
+                            {/* Letter header */}
+                            <div className="mb-8 flex items-center justify-between border-b border-rose-100 pb-5">
+                                <Heart
+                                    size={20}
+                                    strokeWidth={1.5}
+                                    className="text-rose-400"
+                                />
+
+                                <span className="text-xs uppercase tracking-[0.25em] text-rose-300">
+                                    17 • 09 • 2026
+                                </span>
+                            </div>
+
+                            {/* Greeting */}
+                            <h3 className="font-playfair text-3xl text-[#4a2635] md:text-4xl">
+                                {birthdayLetter.greeting}
+                            </h3>
+
+                            {/* Paragraphs */}
+                            <div className="mt-8 space-y-6 text-sm leading-8 text-[#795666] md:text-base md:leading-9">
+                                {birthdayLetter.paragraphs.map(
+                                    (paragraph, index) => (
+                                        <motion.p
+                                            key={index}
+                                            initial={{ opacity: 0, y: 15 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                                duration: 0.6,
+                                                delay: 0.3 + index * 0.15,
+                                            }}
+                                        >
+                                            {paragraph}
+                                        </motion.p>
+                                    ),
+                                )}
+                            </div>
+
+                            {/* Closing */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{
+                                    duration: 0.8,
+                                    delay: 1,
+                                }}
+                                className="mt-10 border-t border-rose-100 pt-8"
+                            >
+                                <p className="font-playfair text-xl leading-8 text-[#4a2635] md:text-2xl">
+                                    {birthdayLetter.closing}
+                                </p>
+
+                                <p className="mt-6 font-playfair text-lg italic text-rose-400">
+                                    {birthdayLetter.signature}
+                                </p>
+                            </motion.div>
+                        </motion.div>
+                    )}
                 </div>
             </section>
         </main>

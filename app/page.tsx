@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Heart, Sparkles, Volume2, VolumeX, ArrowDown } from "lucide-react";
+import confetti from "canvas-confetti";
 import {
     photos,
     birthdayVideos,
@@ -16,6 +17,7 @@ import {
 export default function Home() {
     const [started, setStarted] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
+    const [candlesBlown, setCandlesBlown] = useState(false);
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -47,6 +49,26 @@ export default function Home() {
             audioRef.current.pause();
             setIsMuted(true);
         }
+    };
+
+    const blowCandles = () => {
+        if (candlesBlown) return;
+
+        setCandlesBlown(true);
+
+        confetti({
+            particleCount: 180,
+            spread: 100,
+            origin: { y: 0.6 },
+        });
+
+        setTimeout(() => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.55 },
+            });
+        }, 400);
     };
 
     return (
@@ -1036,6 +1058,204 @@ export default function Home() {
                             className="text-pink-200/70"
                         />
                     </motion.div>
+                </div>
+            </section>
+
+            {/* ==================== BIRTHDAY CAKE ==================== */}
+            <section
+                id="birthday-cake"
+                className="relative overflow-hidden bg-[#fdf4f7] px-6 py-28 md:py-36"
+            >
+                <div className="mx-auto max-w-4xl text-center">
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-rose-400"
+                    >
+                        One More Thing
+                    </motion.p>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.9, delay: 0.1 }}
+                        className="font-playfair text-4xl text-[#4a2635] md:text-6xl"
+                    >
+                        Make a Wish, Pikachu...
+                    </motion.h2>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.25 }}
+                        className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#795666] md:text-base"
+                    >
+                        Three years of friendship deserves a proper birthday
+                        cake. And yes, you actually have to blow out the
+                        candles.
+                    </motion.p>
+
+                    {/* Cake */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, y: 40 }}
+                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            duration: 1,
+                            delay: 0.4,
+                            type: "spring",
+                            stiffness: 100,
+                        }}
+                        className="relative mx-auto mt-20 flex h-82.5 w-full max-w-md items-end justify-center"
+                    >
+                        {/* Candle glow */}
+                        {!candlesBlown && (
+                            <motion.div
+                                animate={{
+                                    opacity: [0.25, 0.5, 0.25],
+                                    scale: [0.95, 1.08, 0.95],
+                                }}
+                                transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                }}
+                                className="absolute bottom-51.25 h-40 w-72 rounded-full bg-pink-300/30 blur-3xl"
+                            />
+                        )}
+
+                        {/* Candles */}
+                        <div className="absolute bottom-52.5 z-20 flex gap-6">
+                            {[1, 2, 3].map((candle) => (
+                                <motion.div
+                                    key={candle}
+                                    initial={{ y: 10, opacity: 0 }}
+                                    whileInView={{ y: 0, opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        duration: 0.5,
+                                        delay: 0.7 + candle * 0.1,
+                                    }}
+                                    className="relative"
+                                >
+                                    {/* Flame */}
+                                    {!candlesBlown && (
+                                        <motion.div
+                                            animate={{
+                                                scale: [1, 1.15, 0.95, 1],
+                                                y: [0, -2, 1, 0],
+                                            }}
+                                            transition={{
+                                                duration: 0.7,
+                                                repeat: Infinity,
+                                                delay: candle * 0.12,
+                                            }}
+                                            className="absolute -top-8 left-1/2 h-7 w-4 -translate-x-1/2 rounded-full bg-orange-400 shadow-[0_0_18px_rgba(251,146,60,0.7)]"
+                                        />
+                                    )}
+
+                                    {/* Candle */}
+                                    <div className="h-20 w-5 rounded-t-md bg-linear-to-b from-rose-300 to-rose-400 shadow-sm">
+                                        <div className="mx-auto h-full w-0.5 bg-white/40" />
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Top cake layer */}
+                        <div className="absolute bottom-30 z-10 h-24 w-72 rounded-[28px] bg-[#f8b8c8] shadow-xl md:w-80">
+                            {/* Cream */}
+                            <div className="absolute -top-3 left-0 h-8 w-full rounded-full bg-[#fff5f7]" />
+
+                            {/* Cream drips */}
+                            <div className="absolute -top-1 left-10 h-8 w-8 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 left-28 h-11 w-8 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 right-28 h-9 w-8 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 right-10 h-7 w-8 rounded-b-full bg-[#fff5f7]" />
+
+                            {/* Decorations */}
+                            <div className="absolute bottom-5 left-8 h-3 w-3 rounded-full bg-white/70" />
+                            <div className="absolute bottom-7 left-20 h-3 w-3 rounded-full bg-white/70" />
+                            <div className="absolute bottom-4 right-20 h-3 w-3 rounded-full bg-white/70" />
+                            <div className="absolute bottom-7 right-8 h-3 w-3 rounded-full bg-white/70" />
+                        </div>
+
+                        {/* Bottom cake layer */}
+                        <div className="absolute bottom-16.25 h-24 w-80 rounded-[30px] bg-[#e997ad] shadow-2xl md:w-96">
+                            {/* Cream */}
+                            <div className="absolute -top-3 left-0 h-8 w-full rounded-full bg-[#fff5f7]" />
+
+                            {/* Cream drips */}
+                            <div className="absolute -top-1 left-12 h-9 w-9 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 left-32 h-7 w-9 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 right-32 h-10 w-9 rounded-b-full bg-[#fff5f7]" />
+                            <div className="absolute -top-1 right-12 h-7 w-9 rounded-b-full bg-[#fff5f7]" />
+                        </div>
+
+                        {/* Plate */}
+                        <div className="absolute bottom-10 h-8 w-90 rounded-full bg-[#d9829b] shadow-lg md:w-107.5" />
+                    </motion.div>
+
+                    {/* Button / result */}
+                    <AnimatePresence mode="wait">
+                        {!candlesBlown ? (
+                            <motion.div
+                                key="wish-button"
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.7, delay: 0.8 }}
+                            >
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.96 }}
+                                    onClick={blowCandles}
+                                    className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl"
+                                >
+                                    Blow Out the Candles
+                                </motion.button>
+
+                                <p className="mt-4 text-xs text-[#9a7181]">
+                                    Close your eyes first. Make a really good
+                                    wish.
+                                </p>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="birthday-message"
+                                initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 0.8 }}
+                            >
+                                <p className="font-playfair text-3xl text-[#4a2635] md:text-4xl">
+                                    Happy Birthday, Energy Biscuit 😒
+                                </p>
+
+                                <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-[#795666]">
+                                    I hope this year brings you more laughter,
+                                    more adventures, more beautiful memories,
+                                    and absolutely no shortage of chaos.
+                                </p>
+
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.6 }}
+                                    className="mt-6 flex justify-center"
+                                >
+                                    <Heart
+                                        size={22}
+                                        strokeWidth={1.5}
+                                        className="text-rose-400"
+                                    />
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </section>
         </main>

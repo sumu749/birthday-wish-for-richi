@@ -1,69 +1,126 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { Heart, Sparkles } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    return (
+        <main className="min-h-screen overflow-hidden bg-[#fff7fa]">
+            {/* Floating Hearts */}
+            <div className="pointer-events-none fixed inset-0 overflow-hidden">
+                {Array.from({ length: 15 }).map((_, index) => (
+                    <motion.div
+                        key={index}
+                        className="absolute text-pink-300/50"
+                        initial={{
+                            x: `${(index * 37) % 100}vw`,
+                            y: "110vh",
+                            opacity: 0,
+                        }}
+                        animate={{
+                            y: "-10vh",
+                            opacity: [0, 1, 1, 0],
+                        }}
+                        transition={{
+                            duration: 8 + (index % 5),
+                            delay: (index * 2) % 5,
+                            repeat: Infinity,
+                            ease: "linear",
+                        }}
+                    >
+                        <Heart size={12 + (index % 15)} fill="currentColor" />
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Hero */}
+            <section className="relative flex min-h-screen items-center justify-center px-6">
+                <div className="absolute left-10 top-20">
+                    <Sparkles className="text-pink-300" size={28} />
+                </div>
+
+                <div className="absolute bottom-24 right-10">
+                    <Sparkles className="text-rose-300" size={22} />
+                </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="relative z-10 max-w-3xl text-center"
+                >
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="mb-5 text-sm font-medium uppercase tracking-[0.35em] text-rose-400"
+                    >
+                        A little surprise for
+                    </motion.p>
+
+                    <motion.h1
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            delay: 0.5,
+                            duration: 0.8,
+                            type: "spring",
+                        }}
+                        className="font-playfair text-6xl font-bold text-[#6d3048] sm:text-7xl md:text-8xl"
+                    >
+                        Richi Fariha
+                    </motion.h1>
+
+                    <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: 100 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                        className="mx-auto my-7 h-0.5 bg-rose-300"
+                    />
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.4 }}
+                        className="mx-auto max-w-xl text-base leading-8 text-[#795565] sm:text-lg"
+                    >
+                        Three years of friendship, chaos, laughter, random
+                        conversations, and memories...
+                        <br />
+                        <span className="font-medium text-rose-400">
+                            and somehow, you still haven&apos;t gotten rid of
+                            me.
+                        </span>
+                    </motion.p>
+
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.8 }}
+                        whileHover={{
+                            scale: 1.05,
+                            boxShadow: "0 15px 40px rgba(214, 113, 143, 0.25)",
+                        }}
+                        whileTap={{ scale: 0.96 }}
+                        className="mt-10 inline-flex items-center gap-3 rounded-full bg-[#d97998] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition"
+                    >
+                        Open Your Surprise
+                        <Heart size={17} fill="currentColor" />
+                    </motion.button>
+                </motion.div>
+
+                {/* Bottom text */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.5 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center"
+                >
+                    <p className="text-xs uppercase tracking-[0.25em] text-rose-300">
+                        scroll when you&apos;re ready
+                    </p>
+                </motion.div>
+            </section>
+        </main>
+    );
 }

@@ -93,3 +93,31 @@ export const richiThings = [
             "Under all the chaos, she's someone I'm genuinely grateful to have.",
     },
 ];
+
+export const littleMemories = [
+    {
+        number: "01",
+        title: "That one random conversation",
+        text: "Replace this with a memory that only we would understand.",
+    },
+    {
+        number: "02",
+        title: "The moment we couldn't stop laughing",
+        text: "Write about one of those completely stupid moments that somehow became unforgettable.",
+    },
+    {
+        number: "03",
+        title: "That day I realized...",
+        text: "Replace this with a moment when you realized how important this friendship had become.",
+    },
+    {
+        number: "04",
+        title: "Our most chaotic moment",
+        text: "Add one of our most ridiculous or chaotic stories here.",
+    },
+    {
+        number: "05",
+        title: "Something I'll never forget",
+        text: "Write about a small thing Richi did that stayed with you.",
+    },
+];

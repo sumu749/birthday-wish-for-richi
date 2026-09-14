@@ -4,7 +4,12 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Heart, Sparkles, Volume2, VolumeX, ArrowDown } from "lucide-react";
-import { photos, birthdayVideos, richiThings } from "@/data/memories";
+import {
+    photos,
+    birthdayVideos,
+    richiThings,
+    littleMemories,
+} from "@/data/memories";
 
 export default function Home() {
     const [started, setStarted] = useState(false);
@@ -671,6 +676,138 @@ export default function Home() {
 
                         <p className="mt-4 font-playfair text-2xl italic text-pink-500 sm:text-3xl">
                             ...and somehow, completely irreplaceable.
+                        </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Little Memories */}
+
+            <section
+                id="little-memories"
+                className="relative overflow-hidden bg-[#fffafc] px-6 py-32 sm:px-10 lg:px-16"
+            >
+                {/* Background */}
+                <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-pink-100/40 blur-3xl" />
+
+                <div className="relative mx-auto max-w-5xl">
+                    {/* Heading */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mb-20 max-w-2xl text-center"
+                    >
+                        <div className="mb-4 flex items-center justify-center gap-2 text-pink-500">
+                            <Heart size={16} fill="currentColor" />
+
+                            <span className="text-xs font-medium uppercase tracking-[0.35em]">
+                                Chapter Four
+                            </span>
+
+                            <Heart size={16} fill="currentColor" />
+                        </div>
+
+                        <h2 className="font-playfair text-4xl font-semibold text-rose-950 sm:text-5xl md:text-6xl">
+                            Little Things I Remember
+                        </h2>
+
+                        <p className="mt-6 text-base leading-7 text-rose-900/60 sm:text-lg">
+                            Not the big dramatic moments.
+                            <br />
+                            Just the little things that somehow stayed with me.
+                        </p>
+                    </motion.div>
+
+                    {/* Timeline */}
+                    <div className="relative">
+                        {/* Center line */}
+                        <div className="absolute left-5 top-0 h-full w-px bg-pink-200 sm:left-1/2 sm:-translate-x-1/2" />
+
+                        <div className="space-y-16">
+                            {littleMemories.map((memory, index) => {
+                                const isRight = index % 2 !== 0;
+
+                                return (
+                                    <motion.div
+                                        key={memory.number}
+                                        initial={{
+                                            opacity: 0,
+                                            x: isRight ? 50 : -50,
+                                        }}
+                                        whileInView={{
+                                            opacity: 1,
+                                            x: 0,
+                                        }}
+                                        viewport={{
+                                            once: true,
+                                            amount: 0.25,
+                                        }}
+                                        transition={{
+                                            duration: 0.7,
+                                        }}
+                                        className="relative grid grid-cols-[40px_1fr] gap-6 sm:grid-cols-2 sm:gap-16"
+                                    >
+                                        {/* Mobile dot */}
+                                        <div className="absolute left-5 top-8 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full bg-pink-400 ring-8 ring-[#fffafc] sm:left-1/2" />
+
+                                        {/* Desktop alternating layout */}
+                                        <div
+                                            className={`${
+                                                isRight
+                                                    ? "sm:col-start-2 sm:row-start-1"
+                                                    : "sm:col-start-1 sm:row-start-1"
+                                            } col-start-2`}
+                                        >
+                                            <div className="rounded-3xl border border-pink-100 bg-white p-7 shadow-lg shadow-pink-100/30 sm:p-8">
+                                                <div className="mb-5 flex items-center justify-between">
+                                                    <span className="font-playfair text-4xl text-pink-100">
+                                                        {memory.number}
+                                                    </span>
+
+                                                    <Heart
+                                                        size={17}
+                                                        className="text-pink-300"
+                                                        fill="currentColor"
+                                                    />
+                                                </div>
+
+                                                <h3 className="font-playfair text-2xl font-semibold text-rose-950">
+                                                    {memory.title}
+                                                </h3>
+
+                                                <p className="mt-4 text-sm leading-7 text-rose-900/60">
+                                                    {memory.text}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Bottom message */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="mx-auto mt-24 max-w-2xl text-center"
+                    >
+                        <Sparkles
+                            size={20}
+                            className="mx-auto mb-5 text-pink-400"
+                        />
+
+                        <p className="font-playfair text-2xl italic leading-relaxed text-rose-900/70 sm:text-3xl">
+                            Maybe it&apos;s not the big moments that make a
+                            friendship special.
+                        </p>
+
+                        <p className="mt-4 font-playfair text-2xl italic text-pink-500 sm:text-3xl">
+                            Maybe it&apos;s all the little ones.
                         </p>
                     </motion.div>
                 </div>

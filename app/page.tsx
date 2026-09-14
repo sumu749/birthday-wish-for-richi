@@ -9,6 +9,7 @@ import {
     birthdayVideos,
     richiThings,
     littleMemories,
+    friendshipMovie,
 } from "@/data/memories";
 
 export default function Home() {
@@ -809,6 +810,146 @@ export default function Home() {
                         <p className="mt-4 font-playfair text-2xl italic text-pink-500 sm:text-3xl">
                             Maybe it&apos;s all the little ones.
                         </p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Friendship Movie */}
+
+            <section
+                id="friendship-movie"
+                className="relative min-h-screen overflow-hidden bg-[#160b13] px-6 py-32 text-white sm:px-10 lg:px-16"
+            >
+                {/* Cinematic background */}
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(244,114,182,0.16),transparent_40%)]" />
+
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-500/10 blur-[120px]" />
+
+                <div className="relative mx-auto flex min-h-[80vh] max-w-5xl items-center justify-center">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="w-full"
+                    >
+                        {/* Top label */}
+                        <div className="mb-10 text-center">
+                            <motion.div
+                                initial={{ opacity: 0, letterSpacing: "0.1em" }}
+                                whileInView={{
+                                    opacity: 1,
+                                    letterSpacing: "0.35em",
+                                }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1 }}
+                                className="text-xs font-medium uppercase text-pink-300"
+                            >
+                                Chapter Five
+                            </motion.div>
+                        </div>
+
+                        {/* Movie Poster */}
+                        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-4xl border border-pink-300/10 bg-linear-to-b from-rose-900/30 to-black p-8 shadow-2xl shadow-pink-950/30 sm:p-12 md:p-16">
+                            {/* Decorative circles */}
+                            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-pink-300/10" />
+
+                            <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full border border-pink-300/10" />
+
+                            {/* Stars */}
+                            <Sparkles
+                                size={18}
+                                className="absolute left-[12%] top-[18%] text-pink-300/50"
+                            />
+
+                            <Sparkles
+                                size={12}
+                                className="absolute right-[15%] top-[30%] text-pink-300/40"
+                            />
+
+                            <Sparkles
+                                size={14}
+                                className="absolute bottom-[20%] left-[20%] text-pink-300/40"
+                            />
+
+                            {/* Movie content */}
+                            <div className="relative text-center">
+                                <p className="text-xs uppercase tracking-[0.35em] text-pink-200/60">
+                                    A story by two idiots
+                                </p>
+
+                                <h2 className="mt-8 font-playfair text-5xl font-semibold leading-none text-pink-50 sm:text-6xl md:text-8xl">
+                                    {friendshipMovie.title}
+                                </h2>
+
+                                <div className="mx-auto mt-7 h-px w-24 bg-pink-300/50" />
+
+                                <p className="mx-auto mt-7 max-w-xl font-playfair text-xl italic leading-8 text-pink-100/70 sm:text-2xl">
+                                    {friendshipMovie.subtitle}
+                                </p>
+
+                                {/* Fake movie metadata */}
+                                <div className="mx-auto mt-12 flex max-w-xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[10px] uppercase tracking-[0.2em] text-pink-200/50">
+                                    <span>{friendshipMovie.genre}</span>
+
+                                    <span className="hidden h-1 w-1 rounded-full bg-pink-300/40 sm:block" />
+
+                                    <span>{friendshipMovie.duration}</span>
+
+                                    <span className="hidden h-1 w-1 rounded-full bg-pink-300/40 sm:block" />
+
+                                    <span>{friendshipMovie.rating}</span>
+                                </div>
+
+                                {/* Main quote */}
+                                <div className="mx-auto mt-16 max-w-2xl">
+                                    <p className="font-playfair text-2xl leading-relaxed text-white/90 sm:text-3xl">
+                                        “Two people.
+                                        <br />
+                                        One friendship.
+                                        <br />
+                                        Absolutely no idea what they&apos;re
+                                        doing.”
+                                    </p>
+                                </div>
+
+                                {/* Cast */}
+                                <div className="mt-16">
+                                    <p className="text-[10px] uppercase tracking-[0.3em] text-pink-300/50">
+                                        Starring
+                                    </p>
+
+                                    <div className="mt-4 flex items-center justify-center gap-4">
+                                        <span className="rounded-full border border-pink-300/20 bg-pink-300/5 px-5 py-2 text-sm text-pink-100/80">
+                                            Sumu
+                                        </span>
+
+                                        <span className="text-pink-300">×</span>
+
+                                        <span className="rounded-full border border-pink-300/20 bg-pink-300/5 px-5 py-2 text-sm text-pink-100/80">
+                                            Richi
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Bottom */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="mt-14 text-center"
+                        >
+                            <p className="font-playfair text-xl italic text-pink-200/60">
+                                And somehow...
+                            </p>
+
+                            <p className="mt-3 text-xs uppercase tracking-[0.3em] text-pink-300/40">
+                                We&apos;re still waiting for the sequel.
+                            </p>
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>

@@ -121,3 +121,12 @@ export const littleMemories = [
         text: "Write about a small thing Richi did that stayed with you.",
     },
 ];
+
+export const friendshipMovie = {
+    title: "Three Years of Chaos",
+    subtitle:
+        "A story about friendship, bad decisions & way too many conversations.",
+    genre: "Comedy • Friendship • Chaos",
+    duration: "3 Years",
+    rating: "∞ / 10",
+};

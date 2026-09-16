@@ -77,8 +77,8 @@ export default function Home() {
     return (
         <main className="min-h-screen overflow-hidden bg-[#fff7fa]">
             {/* Music */}
-            <audio ref={audioRef} loop>
-                <source src="/music/birthday.m4a" type="audio/m4a" />
+            <audio ref={audioRef}>
+                <source src="/music/birthday.m4a" type="audio/mp4" />
             </audio>
 
             {/* Music Control */}

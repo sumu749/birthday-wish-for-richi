@@ -35,6 +35,7 @@ export default function Home() {
     });
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const candleAudioRef = useRef<HTMLAudioElement | null>(null);
 
     const moveNoButton = () => {
         const newTop = Math.floor(Math.random() * 65) + 10;
@@ -57,11 +58,30 @@ export default function Home() {
 
         setStarted(true);
 
+        scrollToSection("warning");
+    };
+
+    const scrollToSection = (sectionId: string) => {
         setTimeout(() => {
-            document
-                .getElementById("warning")
-                ?.scrollIntoView({ behavior: "smooth" });
-        }, 300);
+            document.getElementById(sectionId)?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }, 150);
+    };
+
+    const getProgressMessage = () => {
+        if (!started) return "A little surprise is waiting...";
+        if (!warningAccepted) return "The surprise is about to begin...";
+        if (!photosCompleted) return "Memories are just the beginning...";
+        if (!videosCompleted) return "Now comes the chaos...";
+        if (!richiThingsCompleted) return "A few things about you...";
+        if (!memoriesCompleted) return "Let's revisit our memories...";
+        if (!movieCompleted) return "Our story continues...";
+        if (!emotionalCompleted) return "Something from my heart...";
+        if (!candlesBlown) return "Make a birthday wish...";
+        if (!letterOpen) return "A letter, just for you...";
+        return "Happy Birthday, Richi!";
     };
 
     const toggleMusic = () => {
@@ -79,7 +99,18 @@ export default function Home() {
     const blowCandles = () => {
         if (candlesBlown) return;
 
+        if (candleAudioRef.current) {
+            candleAudioRef.current.currentTime = 0;
+            candleAudioRef.current.play().catch((error) => {
+                console.error("Candle audio could not play:", error);
+            });
+        }
+
         setCandlesBlown(true);
+
+        setTimeout(() => {
+            scrollToSection("birthday-letter");
+        }, 500);
 
         confetti({
             particleCount: 180,
@@ -189,10 +220,24 @@ export default function Home() {
 
             {!showIntro && (
                 <main className="min-h-screen overflow-hidden bg-[#fff7fa]">
+                    <motion.p
+                        key={getProgressMessage()}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="pointer-events-none fixed left-1/2 top-4 z-40 -translate-x-1/2 text-center text-sm text-rose-900/70"
+                    >
+                        {getProgressMessage()}
+                    </motion.p>
+
                     {/* Music */}
                     <audio ref={audioRef}>
                         <source src="/music/birthday.m4a" type="audio/mp4" />
                     </audio>
+                    <audio
+                        ref={candleAudioRef}
+                        src="/music/candle-blow.wav"
+                        preload="auto"
+                    />
 
                     {/* Music Control */}
                     <AnimatePresence>
@@ -331,72 +376,77 @@ export default function Home() {
 
                     {/* ================= WARNING ================= */}
 
-                    <section
-                        id="warning"
-                        className="relative z-10 flex min-h-screen items-center justify-center px-6 py-24"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, y: 80 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.8 }}
-                            className="w-full max-w-2xl rounded-4xl border border-rose-100 bg-white/60 p-8 text-center shadow-[0_20px_80px_rgba(211,110,143,0.12)] backdrop-blur-xl sm:p-14"
+                    {started && (
+                        <section
+                            id="warning"
+                            className="relative z-10 flex min-h-screen items-center justify-center px-6 py-24"
                         >
                             <motion.div
-                                initial={{ rotate: -10, scale: 0.8 }}
-                                whileInView={{ rotate: 0, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2, type: "spring" }}
-                                className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 text-3xl"
-                            >
-                                ⚠️
-                            </motion.div>
-
-                            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-rose-400">
-                                Before you continue...
-                            </p>
-
-                            <h2 className="font-playfair text-4xl font-bold text-[#6d3048] sm:text-5xl">
-                                A Little Warning
-                            </h2>
-
-                            <div className="mx-auto my-8 h-px w-20 bg-rose-200" />
-
-                            <div className="space-y-3 text-sm leading-7 text-[#795565] sm:text-base">
-                                <p>✦ 3 years of memories</p>
-                                <p>✦ Excessive chaos</p>
-                                <p>✦ Questionable decisions</p>
-                                <p>✦ Way too many photos</p>
-                                <p>✦ One very special girl</p>
-                                <p>✦ And possibly some emotional damage</p>
-                            </div>
-
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1 }}
-                                className="mt-8 font-playfair text-xl italic text-rose-400"
-                            >
-                                Proceed anyway?
-                            </motion.p>
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
+                                initial={{ opacity: 0, y: 80 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.3 }}
-                                className="mt-7"
+                                viewport={{ once: true, amount: 0.3 }}
+                                transition={{ duration: 0.8 }}
+                                className="w-full max-w-2xl rounded-4xl border border-rose-100 bg-white/60 p-8 text-center shadow-[0_20px_80px_rgba(211,110,143,0.12)] backdrop-blur-xl sm:p-14"
                             >
-                                <button
-                                    onClick={() => setWarningAccepted(true)}
-                                    className="rounded-full bg-[#d97998] px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition hover:scale-105"
+                                <motion.div
+                                    initial={{ rotate: -10, scale: 0.8 }}
+                                    whileInView={{ rotate: 0, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2, type: "spring" }}
+                                    className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 text-3xl"
                                 >
-                                    YES, OBVIOUSLY 💗
-                                </button>
+                                    ⚠️
+                                </motion.div>
+
+                                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-rose-400">
+                                    Before you continue...
+                                </p>
+
+                                <h2 className="font-playfair text-4xl font-bold text-[#6d3048] sm:text-5xl">
+                                    A Little Warning
+                                </h2>
+
+                                <div className="mx-auto my-8 h-px w-20 bg-rose-200" />
+
+                                <div className="space-y-3 text-sm leading-7 text-[#795565] sm:text-base">
+                                    <p>✦ 3 years of memories</p>
+                                    <p>✦ Excessive chaos</p>
+                                    <p>✦ Questionable decisions</p>
+                                    <p>✦ Way too many photos</p>
+                                    <p>✦ One very special girl</p>
+                                    <p>✦ And possibly some emotional damage</p>
+                                </div>
+
+                                <motion.p
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 1 }}
+                                    className="mt-8 font-playfair text-xl italic text-rose-400"
+                                >
+                                    Proceed anyway?
+                                </motion.p>
+
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 1.3 }}
+                                    className="mt-7"
+                                >
+                                    <button
+                                        onClick={() => {
+                                            setWarningAccepted(true);
+                                            scrollToSection("memories");
+                                        }}
+                                        className="rounded-full bg-[#d97998] px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition hover:scale-105"
+                                    >
+                                        YES, OBVIOUSLY 💗
+                                    </button>
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
-                    </section>
+                        </section>
+                    )}
 
                     {/* Memory section */}
                     {warningAccepted && (
@@ -550,7 +600,10 @@ export default function Home() {
 
                                 <div className="mt-16 flex justify-center">
                                     <button
-                                        onClick={() => setPhotosCompleted(true)}
+                                        onClick={() => {
+                                            setPhotosCompleted(true);
+                                            scrollToSection("birthday-chaos");
+                                        }}
                                         className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition hover:scale-105"
                                     >
                                         Continue the Chaos
@@ -704,7 +757,10 @@ export default function Home() {
 
                                 <div className="mt-16 flex justify-center">
                                     <button
-                                        onClick={() => setVideosCompleted(true)}
+                                        onClick={() => {
+                                            setVideosCompleted(true);
+                                            scrollToSection("richi-things");
+                                        }}
                                         className="rounded-full bg-white px-8 py-4 text-sm font-medium text-[#4a2635] shadow-lg transition hover:scale-105"
                                     >
                                         Continue
@@ -858,14 +914,17 @@ export default function Home() {
                                 </motion.div>
 
                                 <div className="mt-16 flex justify-center">
-                                    <button
-                                        onClick={() =>
-                                            setRichiThingsCompleted(true)
-                                        }
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => {
+                                            setRichiThingsCompleted(true);
+                                            scrollToSection("little-memories");
+                                        }}
                                         className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition hover:scale-105"
                                     >
-                                        Continue
-                                    </button>
+                                        Let&apos;s Remember Some Moments
+                                    </motion.button>
                                 </div>
                             </div>
                         </section>
@@ -1006,14 +1065,17 @@ export default function Home() {
                                 </motion.div>
 
                                 <div className="mt-16 flex justify-center">
-                                    <button
-                                        onClick={() =>
-                                            setMemoriesCompleted(true)
-                                        }
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => {
+                                            setMemoriesCompleted(true);
+                                            scrollToSection("friendship-movie");
+                                        }}
                                         className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition hover:scale-105"
                                     >
-                                        Continue
-                                    </button>
+                                        Our Friendship Movie
+                                    </motion.button>
                                 </div>
                             </div>
                         </section>
@@ -1173,14 +1235,19 @@ export default function Home() {
                                     </motion.div>
 
                                     <div className="mt-16 flex justify-center">
-                                        <button
-                                            onClick={() =>
-                                                setMovieCompleted(true)
-                                            }
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={() => {
+                                                setMovieCompleted(true);
+                                                scrollToSection(
+                                                    "emotional-transition",
+                                                );
+                                            }}
                                             className="rounded-full bg-white px-8 py-4 text-sm font-medium text-[#4a2635] shadow-lg transition hover:scale-105"
                                         >
-                                            Continue
-                                        </button>
+                                            One More Thing...
+                                        </motion.button>
                                     </div>
                                 </motion.div>
                             </div>
@@ -1271,14 +1338,17 @@ export default function Home() {
                                 </motion.div>
 
                                 <div className="mt-16 flex justify-center">
-                                    <button
-                                        onClick={() =>
-                                            setEmotionalCompleted(true)
-                                        }
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => {
+                                            setEmotionalCompleted(true);
+                                            scrollToSection("birthday-cake");
+                                        }}
                                         className="rounded-full bg-white px-8 py-4 text-sm font-medium text-[#4a2635] shadow-lg transition hover:scale-105"
                                     >
-                                        Continue
-                                    </button>
+                                        There&apos;s a Birthday Wish Waiting
+                                    </motion.button>
                                 </div>
                             </div>
                         </section>
@@ -1485,6 +1555,15 @@ export default function Home() {
                                                 absolutely no shortage of chaos.
                                             </p>
 
+                                            <motion.p
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="mt-4 text-sm italic text-rose-400"
+                                            >
+                                                Your wish has been sent to the
+                                                universe.
+                                            </motion.p>
+
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -1505,387 +1584,414 @@ export default function Home() {
                     )}
 
                     {/* ==================== PERSONAL LETTER ==================== */}
-                    <section
-                        id="birthday-letter"
-                        className="relative overflow-hidden bg-[#fdf4f7] px-6 py-32 md:py-40"
-                    >
-                        <div className="mx-auto max-w-3xl text-center">
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8 }}
-                                className="mb-5 text-xs font-medium uppercase tracking-[0.35em] text-rose-400"
-                            >
-                                A Few Words From Me
-                            </motion.p>
-
-                            <motion.h2
-                                initial={{ opacity: 0, y: 25 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.9, delay: 0.1 }}
-                                className="font-playfair text-4xl text-[#4a2635] md:text-6xl"
-                            >
-                                One Last Thing...
-                            </motion.h2>
-
-                            {!letterOpen ? (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 30 }}
+                    {candlesBlown && (
+                        <section
+                            id="birthday-letter"
+                            className="relative overflow-hidden bg-[#fdf4f7] px-6 py-32 md:py-40"
+                        >
+                            <div className="mx-auto max-w-3xl text-center">
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.9, delay: 0.3 }}
-                                    className="mt-20"
+                                    transition={{ duration: 0.8 }}
+                                    className="mb-5 text-xs font-medium uppercase tracking-[0.35em] text-rose-400"
                                 >
-                                    {/* Envelope */}
+                                    A Few Words From Me
+                                </motion.p>
+
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 25 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.9, delay: 0.1 }}
+                                    className="font-playfair text-4xl text-[#4a2635] md:text-6xl"
+                                >
+                                    One Last Thing...
+                                </motion.h2>
+
+                                {!letterOpen ? (
                                     <motion.div
-                                        whileHover={{ y: -8 }}
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
                                         transition={{
-                                            type: "spring",
-                                            stiffness: 250,
+                                            duration: 0.9,
+                                            delay: 0.3,
                                         }}
-                                        className="relative mx-auto h-52 w-80 cursor-pointer md:h-60 md:w-105"
-                                        onClick={() => setLetterOpen(true)}
+                                        className="mt-20"
                                     >
-                                        {/* Envelope shadow */}
-                                        <div className="absolute inset-x-4 bottom-0 h-8 rounded-full bg-rose-900/10 blur-xl" />
+                                        {/* Envelope */}
+                                        <motion.div
+                                            whileHover={{ y: -8 }}
+                                            transition={{
+                                                type: "spring",
+                                                stiffness: 250,
+                                            }}
+                                            className="relative mx-auto h-52 w-80 cursor-pointer md:h-60 md:w-105"
+                                            onClick={() => setLetterOpen(true)}
+                                        >
+                                            {/* Envelope shadow */}
+                                            <div className="absolute inset-x-4 bottom-0 h-8 rounded-full bg-rose-900/10 blur-xl" />
 
-                                        {/* Envelope body */}
-                                        <div className="absolute inset-0 overflow-hidden rounded-xl bg-[#e9a6b9] shadow-2xl">
-                                            {/* Left fold */}
-                                            <div
-                                                className="absolute bottom-0 left-0 h-full w-1/2"
-                                                style={{
-                                                    clipPath:
-                                                        "polygon(0 0, 100% 50%, 0 100%)",
-                                                    background: "#d98da5",
-                                                }}
-                                            />
-
-                                            {/* Right fold */}
-                                            <div
-                                                className="absolute bottom-0 right-0 h-full w-1/2"
-                                                style={{
-                                                    clipPath:
-                                                        "polygon(100% 0, 100% 100%, 0 50%)",
-                                                    background: "#d58aa2",
-                                                }}
-                                            />
-
-                                            {/* Bottom fold */}
-                                            <div
-                                                className="absolute bottom-0 left-0 h-1/2 w-full"
-                                                style={{
-                                                    clipPath:
-                                                        "polygon(0 100%, 50% 0, 100% 100%)",
-                                                    background: "#df96ad",
-                                                }}
-                                            />
-
-                                            {/* Heart seal */}
-                                            <motion.div
-                                                animate={{
-                                                    scale: [1, 1.05, 1],
-                                                }}
-                                                transition={{
-                                                    duration: 2,
-                                                    repeat: Infinity,
-                                                }}
-                                                className="absolute left-1/2 top-1/2 z-20 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg"
-                                            >
-                                                <Heart
-                                                    size={22}
-                                                    fill="currentColor"
-                                                    strokeWidth={1.5}
-                                                    className="text-rose-400"
-                                                />
-                                            </motion.div>
-
-                                            {/* Top flap */}
-                                            <div
-                                                className="absolute left-0 top-0 z-10 h-1/2 w-full"
-                                                style={{
-                                                    clipPath:
-                                                        "polygon(0 0, 100% 0, 50% 100%)",
-                                                    background: "#f2b4c4",
-                                                }}
-                                            />
-                                        </div>
-                                    </motion.div>
-
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.96 }}
-                                        onClick={() => setLetterOpen(true)}
-                                        className="mt-10 rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl"
-                                    >
-                                        Open My Letter
-                                    </motion.button>
-
-                                    <p className="mt-4 text-xs text-[#9a7181]">
-                                        I promise it&apos;s not as dramatic as
-                                        it looks.
-                                    </p>
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    transition={{
-                                        duration: 0.9,
-                                        ease: "easeOut",
-                                    }}
-                                    className="mx-auto mt-16 max-w-2xl rounded-2xl bg-[#fffafc] px-7 py-10 text-left shadow-xl shadow-rose-900/5 md:px-14 md:py-14"
-                                >
-                                    {/* Letter header */}
-                                    <div className="mb-8 flex items-center justify-between border-b border-rose-100 pb-5">
-                                        <Heart
-                                            size={20}
-                                            strokeWidth={1.5}
-                                            className="text-rose-400"
-                                        />
-
-                                        <span className="text-xs uppercase tracking-[0.25em] text-rose-300">
-                                            17 • 09 • 2026
-                                        </span>
-                                    </div>
-
-                                    {/* Greeting */}
-                                    <h3 className="font-playfair text-3xl text-[#4a2635] md:text-4xl">
-                                        {birthdayLetter.greeting}
-                                    </h3>
-
-                                    {/* Paragraphs */}
-                                    <div className="mt-8 space-y-6 text-sm leading-8 text-[#795666] md:text-base md:leading-9">
-                                        {birthdayLetter.paragraphs.map(
-                                            (paragraph, index) => (
-                                                <motion.p
-                                                    key={index}
-                                                    initial={{
-                                                        opacity: 0,
-                                                        y: 15,
+                                            {/* Envelope body */}
+                                            <div className="absolute inset-0 overflow-hidden rounded-xl bg-[#e9a6b9] shadow-2xl">
+                                                {/* Left fold */}
+                                                <div
+                                                    className="absolute bottom-0 left-0 h-full w-1/2"
+                                                    style={{
+                                                        clipPath:
+                                                            "polygon(0 0, 100% 50%, 0 100%)",
+                                                        background: "#d98da5",
                                                     }}
+                                                />
+
+                                                {/* Right fold */}
+                                                <div
+                                                    className="absolute bottom-0 right-0 h-full w-1/2"
+                                                    style={{
+                                                        clipPath:
+                                                            "polygon(100% 0, 100% 100%, 0 50%)",
+                                                        background: "#d58aa2",
+                                                    }}
+                                                />
+
+                                                {/* Bottom fold */}
+                                                <div
+                                                    className="absolute bottom-0 left-0 h-1/2 w-full"
+                                                    style={{
+                                                        clipPath:
+                                                            "polygon(0 100%, 50% 0, 100% 100%)",
+                                                        background: "#df96ad",
+                                                    }}
+                                                />
+
+                                                {/* Heart seal */}
+                                                <motion.div
                                                     animate={{
-                                                        opacity: 1,
-                                                        y: 0,
+                                                        scale: [1, 1.05, 1],
                                                     }}
                                                     transition={{
-                                                        duration: 0.6,
-                                                        delay:
-                                                            0.3 + index * 0.15,
+                                                        duration: 2,
+                                                        repeat: Infinity,
                                                     }}
+                                                    className="absolute left-1/2 top-1/2 z-20 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-lg"
                                                 >
-                                                    {paragraph}
-                                                </motion.p>
-                                            ),
-                                        )}
-                                    </div>
+                                                    <Heart
+                                                        size={22}
+                                                        fill="currentColor"
+                                                        strokeWidth={1.5}
+                                                        className="text-rose-400"
+                                                    />
+                                                </motion.div>
 
-                                    {/* Closing */}
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{
-                                            duration: 0.8,
-                                            delay: 1,
-                                        }}
-                                        className="mt-10 border-t border-rose-100 pt-8"
-                                    >
-                                        <p className="font-playfair text-xl leading-8 text-[#4a2635] md:text-2xl">
-                                            {birthdayLetter.closing}
-                                        </p>
+                                                {/* Top flap */}
+                                                <div
+                                                    className="absolute left-0 top-0 z-10 h-1/2 w-full"
+                                                    style={{
+                                                        clipPath:
+                                                            "polygon(0 0, 100% 0, 50% 100%)",
+                                                        background: "#f2b4c4",
+                                                    }}
+                                                />
+                                            </div>
+                                        </motion.div>
 
-                                        <p className="mt-6 font-playfair text-lg italic text-rose-400">
-                                            {birthdayLetter.signature}
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.96 }}
+                                            onClick={() => setLetterOpen(true)}
+                                            className="mt-10 rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl"
+                                        >
+                                            Open My Letter
+                                        </motion.button>
+
+                                        <p className="mt-4 text-xs text-[#9a7181]">
+                                            I promise it&apos;s not as dramatic
+                                            as it looks.
                                         </p>
                                     </motion.div>
-                                </motion.div>
-                            )}
-                        </div>
-                    </section>
+                                ) : (
+                                    <motion.div
+                                        initial={{
+                                            opacity: 0,
+                                            y: 30,
+                                            scale: 0.97,
+                                        }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        transition={{
+                                            duration: 0.9,
+                                            ease: "easeOut",
+                                        }}
+                                        className="mx-auto mt-16 max-w-2xl rounded-2xl bg-[#fffafc] px-7 py-10 text-left shadow-xl shadow-rose-900/5 md:px-14 md:py-14"
+                                    >
+                                        {/* Letter header */}
+                                        <div className="mb-8 flex items-center justify-between border-b border-rose-100 pb-5">
+                                            <Heart
+                                                size={20}
+                                                strokeWidth={1.5}
+                                                className="text-rose-400"
+                                            />
+
+                                            <span className="text-xs uppercase tracking-[0.25em] text-rose-300">
+                                                17 • 09 • 2026
+                                            </span>
+                                        </div>
+
+                                        {/* Greeting */}
+                                        <h3 className="font-playfair text-3xl text-[#4a2635] md:text-4xl">
+                                            {birthdayLetter.greeting}
+                                        </h3>
+
+                                        {/* Paragraphs */}
+                                        <div className="mt-8 space-y-6 text-sm leading-8 text-[#795666] md:text-base md:leading-9">
+                                            {birthdayLetter.paragraphs.map(
+                                                (paragraph, index) => (
+                                                    <motion.p
+                                                        key={index}
+                                                        initial={{
+                                                            opacity: 0,
+                                                            y: 15,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            y: 0,
+                                                        }}
+                                                        transition={{
+                                                            duration: 0.6,
+                                                            delay:
+                                                                0.3 +
+                                                                index * 0.15,
+                                                        }}
+                                                    >
+                                                        {paragraph}
+                                                    </motion.p>
+                                                ),
+                                            )}
+                                        </div>
+
+                                        {/* Closing */}
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{
+                                                duration: 0.8,
+                                                delay: 1,
+                                            }}
+                                            className="mt-10 border-t border-rose-100 pt-8"
+                                        >
+                                            <p className="font-playfair text-xl leading-8 text-[#4a2635] md:text-2xl">
+                                                {birthdayLetter.closing}
+                                            </p>
+
+                                            <p className="mt-6 font-playfair text-lg italic text-rose-400">
+                                                {birthdayLetter.signature}
+                                            </p>
+
+                                            <div className="mt-10 flex justify-center">
+                                                <motion.button
+                                                    whileHover={{ scale: 1.05 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                    onClick={() =>
+                                                        scrollToSection(
+                                                            "final-surprise",
+                                                        )
+                                                    }
+                                                    className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition hover:scale-105"
+                                                >
+                                                    The Final Surprise
+                                                </motion.button>
+                                            </div>
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </div>
+                        </section>
+                    )}
 
                     {/* ==================== FINAL SURPRISE ==================== */}
-                    <section
-                        id="final-surprise"
-                        className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#24151f] px-6 py-32"
-                    >
-                        {/* Background glow */}
-                        <motion.div
-                            className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-400/10 blur-[120px]"
-                            animate={{
-                                scale: [1, 1.15, 1],
-                                opacity: [0.25, 0.45, 0.25],
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                        />
-
-                        {/* Floating hearts */}
-                        <motion.div
-                            animate={{
-                                y: [0, -20, 0],
-                                opacity: [0.3, 0.6, 0.3],
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                            className="absolute left-[15%] top-[20%]"
+                    {letterOpen && (
+                        <section
+                            id="final-surprise"
+                            className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#24151f] px-6 py-32"
                         >
-                            <Heart
-                                size={18}
-                                strokeWidth={1.3}
-                                className="text-rose-300/40"
-                            />
-                        </motion.div>
-
-                        <motion.div
-                            animate={{
-                                y: [0, 15, 0],
-                                opacity: [0.2, 0.5, 0.2],
-                            }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                delay: 1,
-                                ease: "easeInOut",
-                            }}
-                            className="absolute right-[18%] top-[30%]"
-                        >
-                            <Heart
-                                size={14}
-                                strokeWidth={1.3}
-                                className="text-rose-300/30"
-                            />
-                        </motion.div>
-
-                        <motion.div
-                            animate={{
-                                y: [0, -15, 0],
-                                opacity: [0.2, 0.45, 0.2],
-                            }}
-                            transition={{
-                                duration: 4.5,
-                                repeat: Infinity,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="absolute bottom-[20%] left-[25%]"
-                        >
-                            <Heart
-                                size={12}
-                                strokeWidth={1.3}
-                                className="text-rose-300/30"
-                            />
-                        </motion.div>
-
-                        <div className="relative z-10 mx-auto max-w-3xl text-center">
-                            {/* Small label */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 15 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8 }}
-                                className="mb-8 text-xs uppercase tracking-[0.4em] text-rose-200/50"
-                            >
-                                The End... Probably
-                            </motion.p>
-
-                            {/* Main title */}
-                            <motion.h2
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1 }}
-                                className="font-playfair text-5xl leading-tight text-white md:text-7xl"
-                            >
-                                {finalSurprise.title}
-                            </motion.h2>
-
-                            {/* Divider */}
+                            {/* Background glow */}
                             <motion.div
-                                initial={{ opacity: 0, scaleX: 0 }}
-                                whileInView={{ opacity: 1, scaleX: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.3 }}
-                                className="mx-auto my-10 h-px w-16 bg-rose-200/30"
-                            />
-
-                            {/* Message */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.9, delay: 0.4 }}
-                                className="text-base leading-8 text-rose-50/70 md:text-lg md:leading-9"
-                            >
-                                {finalSurprise.message}
-                            </motion.p>
-
-                            {/* Wish */}
-                            <motion.p
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.9, delay: 0.7 }}
-                                className="mx-auto mt-8 max-w-2xl text-sm leading-8 text-rose-100/60 md:text-base md:leading-9"
-                            >
-                                {finalSurprise.wish}
-                            </motion.p>
-
-                            {/* Year 4 */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, delay: 1 }}
-                                className="mt-14"
-                            >
-                                <p className="font-playfair text-3xl italic text-rose-100 md:text-4xl">
-                                    {finalSurprise.ending}
-                                </p>
-
-                                <p className="mt-4 text-sm tracking-wide text-rose-200/50">
-                                    {finalSurprise.signature}
-                                </p>
-                            </motion.div>
-
-                            {/* Heart */}
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{
-                                    duration: 0.8,
-                                    delay: 1.3,
-                                    type: "spring",
+                                className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-400/10 blur-[120px]"
+                                animate={{
+                                    scale: [1, 1.15, 1],
+                                    opacity: [0.25, 0.45, 0.25],
                                 }}
-                                className="mt-16 flex justify-center"
+                                transition={{
+                                    duration: 6,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                }}
+                            />
+
+                            {/* Floating hearts */}
+                            <motion.div
+                                animate={{
+                                    y: [0, -20, 0],
+                                    opacity: [0.3, 0.6, 0.3],
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                }}
+                                className="absolute left-[15%] top-[20%]"
                             >
                                 <Heart
-                                    size={28}
+                                    size={18}
                                     strokeWidth={1.3}
-                                    className="text-rose-300/70"
+                                    className="text-rose-300/40"
                                 />
                             </motion.div>
 
-                            {/* Signature */}
-                            <motion.p
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, delay: 1.6 }}
-                                className="mt-20 text-[10px] uppercase tracking-[0.5em] text-rose-200/30"
+                            <motion.div
+                                animate={{
+                                    y: [0, 15, 0],
+                                    opacity: [0.2, 0.5, 0.2],
+                                }}
+                                transition={{
+                                    duration: 5,
+                                    repeat: Infinity,
+                                    delay: 1,
+                                    ease: "easeInOut",
+                                }}
+                                className="absolute right-[18%] top-[30%]"
                             >
-                                Made with way too much love & chaos
-                            </motion.p>
-                        </div>
-                    </section>
+                                <Heart
+                                    size={14}
+                                    strokeWidth={1.3}
+                                    className="text-rose-300/30"
+                                />
+                            </motion.div>
+
+                            <motion.div
+                                animate={{
+                                    y: [0, -15, 0],
+                                    opacity: [0.2, 0.45, 0.2],
+                                }}
+                                transition={{
+                                    duration: 4.5,
+                                    repeat: Infinity,
+                                    delay: 0.5,
+                                    ease: "easeInOut",
+                                }}
+                                className="absolute bottom-[20%] left-[25%]"
+                            >
+                                <Heart
+                                    size={12}
+                                    strokeWidth={1.3}
+                                    className="text-rose-300/30"
+                                />
+                            </motion.div>
+
+                            <div className="relative z-10 mx-auto max-w-3xl text-center">
+                                {/* Small label */}
+                                <motion.p
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8 }}
+                                    className="mb-8 text-xs uppercase tracking-[0.4em] text-rose-200/50"
+                                >
+                                    The End... Probably
+                                </motion.p>
+
+                                {/* Main title */}
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1 }}
+                                    className="font-playfair text-5xl leading-tight text-white md:text-7xl"
+                                >
+                                    {finalSurprise.title}
+                                </motion.h2>
+
+                                {/* Divider */}
+                                <motion.div
+                                    initial={{ opacity: 0, scaleX: 0 }}
+                                    whileInView={{ opacity: 1, scaleX: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: 0.3 }}
+                                    className="mx-auto my-10 h-px w-16 bg-rose-200/30"
+                                />
+
+                                {/* Message */}
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.9, delay: 0.4 }}
+                                    className="text-base leading-8 text-rose-50/70 md:text-lg md:leading-9"
+                                >
+                                    {finalSurprise.message}
+                                </motion.p>
+
+                                {/* Wish */}
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.9, delay: 0.7 }}
+                                    className="mx-auto mt-8 max-w-2xl text-sm leading-8 text-rose-100/60 md:text-base md:leading-9"
+                                >
+                                    {finalSurprise.wish}
+                                </motion.p>
+
+                                {/* Year 4 */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1, delay: 1 }}
+                                    className="mt-14"
+                                >
+                                    <p className="font-playfair text-3xl italic text-rose-100 md:text-4xl">
+                                        {finalSurprise.ending}
+                                    </p>
+
+                                    <p className="mt-4 text-sm tracking-wide text-rose-200/50">
+                                        {finalSurprise.signature}
+                                    </p>
+                                </motion.div>
+
+                                {/* Heart */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        duration: 0.8,
+                                        delay: 1.3,
+                                        type: "spring",
+                                    }}
+                                    className="mt-16 flex justify-center"
+                                >
+                                    <Heart
+                                        size={28}
+                                        strokeWidth={1.3}
+                                        className="text-rose-300/70"
+                                    />
+                                </motion.div>
+
+                                {/* Signature */}
+                                <motion.p
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1, delay: 1.6 }}
+                                    className="mt-20 text-[10px] uppercase tracking-[0.5em] text-rose-200/30"
+                                >
+                                    Made with way too much love & chaos
+                                </motion.p>
+                            </div>
+                        </section>
+                    )}
                 </main>
             )}
         </>

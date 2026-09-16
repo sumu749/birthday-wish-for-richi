@@ -97,31 +97,30 @@ export const richiThings = [
 export const littleMemories = [
     {
         number: "01",
-        title: "That one random conversation",
-        text: "Replace this with a memory that only we would understand.",
+        title: "Our Hostel Nights",
+        text: "When we both came to the hostel in our first year, we used to stay up late at night, talking, laughing our hearts out, and creating memories without even realizing it. Since I was an introvert, you introduced me to your other friends and took me out with you. Whenever my roommate came back to the hostel from home, we would stand in the corridor at night, covering our mouths while laughing so loudly, just so the seniors wouldn't hear us. And whenever I cried, you would come and hug me. There are so many memories from those days that I could never fit them all into one paragraph.",
     },
     {
         number: "02",
-        title: "The moment we couldn't stop laughing",
-        text: "Write about one of those completely stupid moments that somehow became unforgettable.",
+        title: "The Shakchunni Recording",
+        text: "I still remember that night when the two of us were laughing so loudly and in such a weird way that we suddenly decided to record it. And what did we do next? We shared that recording in our batch discussion group at midnight. The laughter sounded exactly like a shakchunni, bhai! Honestly, I don't know what was funnier: our laughter or the fact that we thought sharing it with the entire batch at midnight was a good idea.",
     },
     {
         number: "03",
-        title: "That day I realized...",
-        text: "Replace this with a moment when you realized how important this friendship had become.",
+        title: "Why You Mean So Much to Me",
+        text: "So many new friends have come and gone from your life, but look at me... I'm still standing right here. I don't know why I always try so hard to hold on to my friendships, even when some of them slowly fall apart or become distant. We've had our share of arguments, and sometimes you became really rude to me. But somehow, I could never be the same way with you. You held me together during some of the saddest moments of my life. I still remember when I had a high fever during my lab finals. You took care of me like a mother, even putting your own studies aside. You put water-soaked cloths on my forehead and cooked three meals a day for me, just like my mom would. I can never repay that kindness. Maybe that's why I can never truly be rude to you. Otherwise, if someone else dared to give me that angry look, I would probably have already taken their eyes out. 🤦‍♀️ Jokes apart, you really mean a lot to me.",
     },
     {
         number: "04",
-        title: "Our most chaotic moment",
-        text: "Add one of our most ridiculous or chaotic stories here.",
+        title: "AC, Fake Money & Questionable Decisions",
+        text: "Remember when we went to Roopar Hat at Police Plaza even though we barely had any money, but still acted like we were there to go shopping? In reality, we just went there to enjoy the air conditioning. And that fake 500-taka note I had... you used it to buy a table, and somehow you even managed to take another 50 taka from the shopkeeper uncle to pay for the rickshaw fare. I still don't understand how you managed to pull that off. Looking back, our decisions were questionable, but the memories were priceless.",
     },
     {
         number: "05",
-        title: "Something I'll never forget",
-        text: "Write about a small thing Richi did that stayed with you.",
+        title: "Everything You Have Given Me",
+        text: "There are so many things you've done for me that I could never list them all. You introduced me to so many streets of Bogura, so many people, and so many new experiences. You've given me knowledge, laughter, memories, and even some pain. But I don't want to hold on to the saddest moments anymore. It's your birthday, baby, and today I just want to remember the good things, the laughter, the care, and all the beautiful memories we've created together. Thank you for being a part of my life in ways you may never fully understand.",
     },
 ];
-
 export const friendshipMovie = {
     title: "Three Years of Chaos",
     subtitle:

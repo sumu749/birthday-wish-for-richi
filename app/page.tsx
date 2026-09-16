@@ -161,7 +161,7 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.35 }}
-                                className="mt-6 font-playfair text-4xl leading-tight text-[#4a2635] md:text-5xl"
+                                className="mt-6 font-playfair text-3xl leading-tight text-[#4a2635] sm:text-4xl md:text-5xl"
                             >
                                 Something is cooked for you...
                             </motion.h1>
@@ -291,7 +291,7 @@ export default function Home() {
 
                     {/* ================= HERO ================= */}
 
-                    <section className="relative z-10 flex min-h-screen items-center justify-center px-6">
+                    <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-20 sm:px-6">
                         <div className="absolute left-10 top-20">
                             <Sparkles className="text-pink-300" size={28} />
                         </div>
@@ -323,7 +323,7 @@ export default function Home() {
                                     duration: 0.8,
                                     type: "spring",
                                 }}
-                                className="font-playfair text-6xl font-bold text-[#6d3048] sm:text-7xl md:text-8xl"
+                                className="font-playfair text-4xl font-bold leading-tight text-[#6d3048] sm:text-5xl md:text-6xl lg:text-7xl"
                             >
                                 Richi Fariha
                             </motion.h1>
@@ -339,7 +339,7 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.4 }}
-                                className="mx-auto max-w-xl text-base leading-8 text-[#795565] sm:text-lg"
+                                className="mx-auto max-w-xl px-2 text-sm leading-7 text-[#795565] sm:text-base sm:leading-8 md:text-lg"
                             >
                                 Three years of friendship, chaos, laughter,
                                 random conversations...
@@ -358,7 +358,7 @@ export default function Home() {
                                         "0 15px 40px rgba(214, 113, 143, 0.25)",
                                 }}
                                 whileTap={{ scale: 0.96 }}
-                                className="mt-10 inline-flex items-center gap-3 rounded-full bg-[#d97998] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition"
+                                className="mt-10 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#d97998] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-rose-200 transition sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                             >
                                 Open Your Surprise
                                 <Heart size={17} fill="currentColor" />
@@ -452,7 +452,7 @@ export default function Home() {
                     {warningAccepted && (
                         <section
                             id="memories"
-                            className="relative overflow-hidden bg-[#fff5f8] px-6 py-28 sm:px-10 lg:px-16"
+                            className="relative overflow-hidden bg-[#fff5f8] px-4 py-20 sm:px-6 sm:py-28 md:px-10 lg:px-16"
                         >
                             {/* Soft background decoration */}
                             <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-pink-200/30 blur-3xl" />
@@ -491,7 +491,7 @@ export default function Home() {
                                 </motion.div>
 
                                 {/* Photo Gallery */}
-                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
                                     {photos.map((photo, index) => {
                                         const rotations = [-3, 2, -2, 3, -1, 2];
 
@@ -709,7 +709,7 @@ export default function Home() {
                                                         controls
                                                         playsInline
                                                         preload="metadata"
-                                                        className="aspect-video w-full object-cover"
+                                                        className="aspect-video h-auto w-full object-cover"
                                                     />
                                                 </div>
 
@@ -847,7 +847,7 @@ export default function Home() {
                                                 }}
                                                 className="group cursor-default"
                                             >
-                                                <div className="relative h-full overflow-hidden rounded-3xl border border-pink-100 bg-white p-7 shadow-lg shadow-pink-100/40 transition duration-500 group-hover:shadow-xl group-hover:shadow-pink-200/50">
+                                                <div className="relative h-full overflow-hidden rounded-3xl border border-pink-100 bg-white p-5 shadow-lg shadow-pink-100/40 transition duration-500 group-hover:shadow-xl group-hover:shadow-pink-200/50 sm:p-6 md:p-8">
                                                     <motion.div
                                                         whileHover={{
                                                             scale: 1.2,
@@ -869,7 +869,7 @@ export default function Home() {
                                                         ).padStart(2, "0")}
                                                     </div>
 
-                                                    <h3 className="font-playfair text-2xl font-semibold text-rose-950">
+                                                    <h3 className="wrap-break-word font-playfair text-xl font-semibold text-rose-950 sm:text-2xl">
                                                         {item.title}
                                                     </h3>
 
@@ -998,10 +998,10 @@ export default function Home() {
                                                     transition={{
                                                         duration: 0.7,
                                                     }}
-                                                    className="relative grid grid-cols-[40px_1fr] gap-6 sm:grid-cols-2 sm:gap-16"
+                                                    className="relative grid grid-cols-[28px_minmax(0,1fr)] gap-4 sm:grid-cols-2 sm:gap-16"
                                                 >
                                                     {/* Mobile dot */}
-                                                    <div className="absolute left-5 top-8 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full bg-pink-400 ring-8 ring-[#fffafc] sm:left-1/2" />
+                                                    <div className="absolute left-3.5 top-8 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full bg-pink-400 ring-8 ring-[#fffafc] sm:left-1/2" />
 
                                                     {/* Desktop alternating layout */}
                                                     <div
@@ -1011,7 +1011,7 @@ export default function Home() {
                                                                 : "sm:col-start-1 sm:row-start-1"
                                                         } col-start-2`}
                                                     >
-                                                        <div className="rounded-3xl border border-pink-100 bg-white p-7 shadow-lg shadow-pink-100/30 sm:p-8">
+                                                        <div className="min-w-0 rounded-3xl border border-pink-100 bg-white p-5 shadow-lg shadow-pink-100/30 sm:p-8">
                                                             <div className="mb-5 flex items-center justify-between">
                                                                 <span className="font-playfair text-4xl text-pink-100">
                                                                     {
@@ -1121,7 +1121,7 @@ export default function Home() {
                                     </div>
 
                                     {/* Movie Poster */}
-                                    <div className="relative mx-auto max-w-4xl overflow-hidden rounded-4xl border border-pink-300/10 bg-linear-to-b from-rose-900/30 to-black p-8 shadow-2xl shadow-pink-950/30 sm:p-12 md:p-16">
+                                    <div className="relative mx-auto max-w-4xl overflow-hidden rounded-4xl border border-pink-300/10 bg-linear-to-b from-rose-900/30 to-black p-5 shadow-2xl shadow-pink-950/30 sm:p-8 md:p-12 lg:p-16">
                                         {/* Decorative circles */}
                                         <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-pink-300/10" />
 
@@ -1149,7 +1149,7 @@ export default function Home() {
                                                 A story by two idiots
                                             </p>
 
-                                            <h2 className="mt-8 font-playfair text-5xl font-semibold leading-none text-pink-50 sm:text-6xl md:text-8xl">
+                                            <h2 className="mt-8 wrap-break-word font-playfair text-4xl font-semibold leading-tight text-pink-50 sm:text-6xl md:text-8xl">
                                                 {friendshipMovie.title}
                                             </h2>
 
@@ -1376,7 +1376,7 @@ export default function Home() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.9, delay: 0.1 }}
-                                    className="font-playfair text-4xl text-[#4a2635] md:text-6xl"
+                                    className="font-playfair text-3xl leading-tight text-[#4a2635] sm:text-4xl md:text-6xl"
                                 >
                                     Make a Wish, Pikachu...
                                 </motion.h2>
@@ -1404,7 +1404,7 @@ export default function Home() {
                                         type: "spring",
                                         stiffness: 100,
                                     }}
-                                    className="relative mx-auto mt-20 flex h-82.5 w-full max-w-md items-end justify-center"
+                                    className="relative mx-auto mt-16 flex h-82.5 w-full max-w-md items-end justify-center px-2 sm:mt-20"
                                 >
                                     {/* Candle glow */}
                                     {!candlesBlown && (
@@ -1468,7 +1468,7 @@ export default function Home() {
                                     </div>
 
                                     {/* Top cake layer */}
-                                    <div className="absolute bottom-30 z-10 h-24 w-72 rounded-[28px] bg-[#f8b8c8] shadow-xl md:w-80">
+                                    <div className="absolute bottom-30 z-10 h-24 w-[min(18rem,calc(100vw-4rem))] rounded-[28px] bg-[#f8b8c8] shadow-xl md:w-80">
                                         {/* Cream */}
                                         <div className="absolute -top-3 left-0 h-8 w-full rounded-full bg-[#fff5f7]" />
 
@@ -1486,7 +1486,7 @@ export default function Home() {
                                     </div>
 
                                     {/* Bottom cake layer */}
-                                    <div className="absolute bottom-16.25 h-24 w-80 rounded-[30px] bg-[#e997ad] shadow-2xl md:w-96">
+                                    <div className="absolute bottom-16.25 h-24 w-[min(20rem,calc(100vw-3rem))] rounded-[30px] bg-[#e997ad] shadow-2xl md:w-96">
                                         {/* Cream */}
                                         <div className="absolute -top-3 left-0 h-8 w-full rounded-full bg-[#fff5f7]" />
 
@@ -1498,7 +1498,7 @@ export default function Home() {
                                     </div>
 
                                     {/* Plate */}
-                                    <div className="absolute bottom-10 h-8 w-90 rounded-full bg-[#d9829b] shadow-lg md:w-107.5" />
+                                    <div className="absolute bottom-10 h-8 w-[min(22.5rem,calc(100vw-2rem))] rounded-full bg-[#d9829b] shadow-lg md:w-107.5" />
                                 </motion.div>
 
                                 {/* Button / result */}
@@ -1518,7 +1518,7 @@ export default function Home() {
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.96 }}
                                                 onClick={blowCandles}
-                                                className="rounded-full bg-[#4a2635] px-8 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl"
+                                                className="w-full rounded-full bg-[#4a2635] px-6 py-4 text-sm font-medium text-white shadow-lg transition-shadow hover:shadow-xl sm:w-auto sm:px-8"
                                             >
                                                 Blow Out the Candles
                                             </motion.button>
@@ -1628,7 +1628,7 @@ export default function Home() {
                                                 type: "spring",
                                                 stiffness: 250,
                                             }}
-                                            className="relative mx-auto h-52 w-80 cursor-pointer md:h-60 md:w-105"
+                                            className="relative mx-auto h-44 w-full max-w-[20rem] cursor-pointer sm:h-52 md:h-60 md:max-w-105"
                                             onClick={() => setLetterOpen(true)}
                                         >
                                             {/* Envelope shadow */}
@@ -1723,7 +1723,7 @@ export default function Home() {
                                             duration: 0.9,
                                             ease: "easeOut",
                                         }}
-                                        className="mx-auto mt-16 max-w-2xl rounded-2xl bg-[#fffafc] px-7 py-10 text-left shadow-xl shadow-rose-900/5 md:px-14 md:py-14"
+                                        className="mx-auto mt-12 w-full max-w-2xl rounded-2xl bg-[#fffafc] px-5 py-8 text-left shadow-xl shadow-rose-900/5 sm:mt-16 sm:px-8 sm:py-10 md:px-14 md:py-14"
                                     >
                                         {/* Letter header */}
                                         <div className="mb-8 flex items-center justify-between border-b border-rose-100 pb-5">
@@ -1813,7 +1813,7 @@ export default function Home() {
                     {letterOpen && (
                         <section
                             id="final-surprise"
-                            className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#24151f] px-6 py-32"
+                            className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#24151f] px-4 py-24 sm:px-6 sm:py-32"
                         >
                             {/* Background glow */}
                             <motion.div
@@ -1907,7 +1907,7 @@ export default function Home() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 1 }}
-                                    className="font-playfair text-5xl leading-tight text-white md:text-7xl"
+                                    className="wrap-break-word font-playfair text-4xl leading-tight text-white sm:text-5xl md:text-7xl"
                                 >
                                     {finalSurprise.title}
                                 </motion.h2>
@@ -1927,7 +1927,7 @@ export default function Home() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.9, delay: 0.4 }}
-                                    className="text-base leading-8 text-rose-50/70 md:text-lg md:leading-9"
+                                    className="text-sm leading-7 text-rose-50/70 sm:text-base sm:leading-8 md:text-lg md:leading-9"
                                 >
                                     {finalSurprise.message}
                                 </motion.p>

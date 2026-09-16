@@ -139,14 +139,23 @@ export const emotionalTransition = {
 
 export const birthdayLetter = {
     greeting: "Dear Richi,",
+
     paragraphs: [
-        "Three years ago, I didn't know that a random friendship would become something this special.",
-        "We've had our share of ridiculous conversations, chaotic moments, random laughter, and probably enough nonsense to fill several lifetimes.",
-        "But behind all of that, there are so many little moments that I'm genuinely grateful for. Thank you for being someone I can laugh with, talk to, and simply be myself around.",
-        "I don't know what the next few years will look like, but I really hope our friendship continues to grow, change, and somehow remain just as chaotic.",
+        "I don't think I've ever properly told you how much your presence has meant to me. Somewhere along the way, you became a part of my everyday life, and I became used to having you around.",
+
+        "We're not perfect, and our friendship hasn't always been easy. But even after all the arguments, misunderstandings, and changes, you still remain someone I deeply care about.",
+
+        "I may not always know how to express my feelings, and I may not say it often enough, but please know that I appreciate you more than my words can explain.",
+
+        "I hope you always find reasons to smile, people who genuinely care for you, and the courage to chase everything you dream of. And whenever life feels a little too much, I hope you remember that you don't have to face everything alone.",
+
+        "Thank you for being a part of my life and for giving me memories I'll carry for a long time. Whatever the future looks like, I'm glad our paths crossed.",
     ],
-    closing: "Happy Birthday, Richi. I'm really lucky to call you my bestie.",
-    signature: "— Sumaiya",
+
+    closing:
+        "Keep playing, keep shining, and keep being the effortlessly iconic person you are. Happy Birthday, my prettiest baddieee. You deserve all the happiness in the world. Love you, bestie.",
+
+    signature: "— Sumu",
 };
 
 export const finalSurprise = {
